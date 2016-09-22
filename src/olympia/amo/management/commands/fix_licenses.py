@@ -1,7 +1,4 @@
-import json
-
-from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.translation import activate
 
 from olympia.versions.models import License
@@ -49,7 +46,8 @@ class Command(BaseCommand):
             last_version.save()
 
         # Now we're able to fix the actual strings.
-        # Broken are: de, en-us, and fr. We untangled those three above already.
+        # Broken are: de, en-us, and fr. We untangled those three above
+        # already.
         translations = Translation.objects.filter(
             id=mpl11.name.id,
             locale__in=('en-us', 'fr', 'de'))
